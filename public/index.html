@@ -1,19 +1,47 @@
 <!DOCTYPE HTML>
-<html>	<head>
+<html>
+	<head>
 		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<title>loginPage</title>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
+		<script src="/javascripts/loginValidate.js"></script>
 	</head>
 	<body>
-		<form  method="POST" action="http://192.168.0.125:3000/member/register">
-		  <label for="fname">First name:</label><br>
-		  <input type="text" id="fname" name="name"><br>
-		  <label for="lname">Last name:</label><br>
-		  <input type="text" id="lname" name="email">
-		  <label for="fname">First name:</label><br>
-		  <input type="text" id="fname" name="password"><br>
-		  <button type="submit">submit</button>
-		</form>	
+		<div style="padding-left: 15%">
+			<div style="padding-top:150px ">
+				<h2><span  class="badge col-md-2 offset-md-4">Regist a account</span></h2>
+			</div>
+		</div>
+		<div style="padding-left: 8% ">	
+			<div style="padding-top: 30px" class=""></div>
+				<form method="POST" action="http://192.168.0.125:3000/member/register" class="" name="registForm" onsubmit="return (checkRegistForm());">
+			  		<div class="form-group">
+		    			<input type="text" id="RegistInputUsername" class="col-lg-3 form-control offset-md-4 bg-light"  aria-describedby="emailHelp" placeholder="Username" name="name">
+		  			</div>
+		  			<div class="form-group">
+		    			<input type="email" class="col-lg-3 form-control offset-md-4 bg-light" id="registEmail" placeholder="EMail" name="email">
+		  			</div>
+		  			<div class="form-group">
+		    			<input type="password" class="col-lg-3 form-control offset-md-4 bg-light" id="registPassword" placeholder="Password" name="password">
+		  			</div>
+		  			<div style="padding-right: 3%" class="form-group form-check">
+		    			<input class="offset-md-4" type="checkbox" class="form-check-input" id="exampleCheck1">
+		    			<label class="form-check-label" for="exampleCheck1">I agree</label>
+		    			<a style="padding-left: 17%" href="">forgot?</a>
+		  			</div>
+		  			<button type="submit" class="col-lg-3 btn btn-primary offset-md-4">Submit</button>
+				</form>
+			</div>
+		</div>
 	</body>
 </html>
+
+<script type="text/javascript">
+	function check(){
+		if(document.getElementById("RegistInputUsername").value == ""){
+			alert("456");
+			return false;
+		}
+	}
+</script>

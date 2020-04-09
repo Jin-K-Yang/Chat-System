@@ -34,6 +34,7 @@ module.exports = class Member{
 			})
 		},(err)=>{
 			res.json({
+				status : "register failed!",
 				result : err
 			})
 		})

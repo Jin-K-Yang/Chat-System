@@ -15,7 +15,7 @@
 		</div>
 		<div style="padding-left: 8% ">	
 			<div style="padding-top: 30px" class=""></div>
-				<form method="POST" action="http://192.168.0.125:3000/member/register" class="" name="registForm" onsubmit="return (checkRegistForm());">
+				<form  class="" name="registForm">
 			  		<div class="form-group">
 		    			<input type="text" id="RegistInputUsername" class="col-lg-3 form-control offset-md-4 bg-light"  aria-describedby="emailHelp" placeholder="Username" name="name">
 		  			</div>
@@ -30,7 +30,7 @@
 		    			<label class="form-check-label" for="exampleCheck1">I agree</label>
 		    			<a style="padding-left: 17%" href="">forgot?</a>
 		  			</div>
-		  			<button type="submit" class="col-lg-3 btn btn-primary offset-md-4">Submit</button>
+		  			<button type="button" class="col-lg-3 btn btn-primary offset-md-4" onclick="send_out();">Submit</button>
 				</form>
 			</div>
 		</div>
@@ -38,10 +38,35 @@
 </html>
 
 <script type="text/javascript">
-	function check(){
-		if(document.getElementById("RegistInputUsername").value == ""){
-			alert("456");
-			return false;
+
+	xhr = new XMLHttpRequest();
+	
+	function send_out(){
+		init();
+		if(checkRegistForm()){
+			var data = "name=" + name + "&email=" + email + "&password=" + password;
+
+			xhr.open("POST", "http://192.168.0.125:3000/member/register");
+			xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+			xhr.send(data);
+
+			response();
 		}
+	}
+
+	function response(){
+		xhr.onreadystatechange = function() {
+			    if (xhr.readyState == XMLHttpRequest.DONE) {
+			        	var response = xhr.responseText;
+						alert(response);
+				    }
+				}
+	}
+
+	function init() {
+		name = document.getElementById("RegistInputUsername").value;
+		email = document.getElementById("registEmail").value;
+		password = document.getElementById("registPassword").value;
 	}
 </script>

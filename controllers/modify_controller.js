@@ -20,13 +20,16 @@ Date.prototype.yyyymmddhhmmss = function() {
 module.exports = class Member{
 	//get data from client
 	postRegister(req, res, next){
+
+		console.log(req.body);
 		const member_data = {
 			name : req.body.name,
 			email : req.body.email,
 			password : req.body.password,
 			create_date : onTime()
 		}
-
+		
+		res.header("Access-Control-Allow-Origin", "*");
 		toRegister(member_data).then(result=>{
 			res.json({
 				status : "register success!",

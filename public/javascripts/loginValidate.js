@@ -1,36 +1,5 @@
 
 
-// Form validation code will come here.
-function validate()
-{
- 
-     if( document.myForm.Name.value == "" )
-     {
-       alert( "Please provide your name!" );
-       document.myForm.Name.focus() ;
-       return false;
-     }
-     if( document.myForm.EMail.value == "" )
-     {
-       alert( "Please provide your Email!" );
-       document.myForm.EMail.focus() ;
-       return false;
-     }
-     if( document.myForm.Zip.value == "" ||
-             isNaN( document.myForm.Zip.value ) ||
-             document.myForm.Zip.value.length != 5 )
-     {
-       alert( "Please provide a zip in the format #####." );
-       document.myForm.Zip.focus() ;
-       return false;
-     }
-     if( document.myForm.Country.value == "-1" )
-     {
-       alert( "Please provide your country!" );
-       return false;
-     }
-  return( true );
-}
 
 
 
@@ -44,10 +13,15 @@ function checkRegistForm()
   var emailID = document.registForm.registEmail.value;
   atpos = emailID.indexOf("@");
   dotpos = emailID.lastIndexOf(".");
+  var registerAgree = null;
+  registerAgree = document.getElementById("registerAgree");
   if (atpos < 1 || ( dotpos - atpos < 2 ) || userName.value.length <= 0 || passWord.value.length <= 0) 
   {
     alert("Please enter correct data");
     //document.myForm.EMail.focus();
+    return false;
+  }else if(registerAgree.checked == 0){
+    alert("please agree !!");
     return false;
   }
   return true;
@@ -70,5 +44,37 @@ function checkLoginForm()
    }
    return( true );
 }
+
+
+xhr = new XMLHttpRequest();
+  
+  function send_out(){
+    init();
+    if(checkRegistForm()){
+      var data = "name=" + name + "&email=" + email + "&password=" + password;
+
+      xhr.open("POST", "http://192.168.0.125:3000/member/register");
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+      xhr.send(data);
+
+      response();
+    }
+  }
+
+  function response(){
+    xhr.onreadystatechange = function() {
+          if (xhr.readyState == XMLHttpRequest.DONE) {
+                var response = xhr.responseText;
+            alert(response);
+            }
+        }
+  }
+
+  function init() {
+    name = document.getElementById("RegistInputUsername").value;
+    email = document.getElementById("registEmail").value;
+    password = document.getElementById("registPassword").value;
+  }
 
 

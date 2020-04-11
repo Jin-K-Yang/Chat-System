@@ -30,14 +30,15 @@ module.exports = class Member{
 		}
 		
 		res.header("Access-Control-Allow-Origin", "*");
+
 		toRegister(member_data).then(result=>{
 			res.json({
-				status : "register success!",
+				status : "1",
 				result : result
 			})
 		},(err)=>{
 			res.json({
-				status : "register failed!",
+				status : "0",
 				result : err
 			})
 		})

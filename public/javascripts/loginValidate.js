@@ -54,7 +54,7 @@ function send_out(){
   if(checkRegistForm()){
     var data = "name=" + name + "&email=" + email + "&password=" + password;
 
-    xhr.open("POST", "http://192.168.0.125:3000/member/register");
+    xhr.open("POST", "http://localhost:3000/member/register");
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
     xhr.send(data);

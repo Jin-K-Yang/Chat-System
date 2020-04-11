@@ -48,28 +48,28 @@ function checkLoginForm()
 
 xhr = new XMLHttpRequest();
   
-  function send_out(){
-    init();
-    if(checkRegistForm()){
-      var data = "name=" + name + "&email=" + email + "&password=" + password;
+function send_out(){
+  init();
+  if(checkRegistForm()){
+    var data = "name=" + name + "&email=" + email + "&password=" + password;
 
-      xhr.open("POST", "http://192.168.0.125:3000/member/register");
-      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.open("POST", "http://192.168.0.125:3000/member/register");
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
-      xhr.send(data);
+    xhr.send(data);
 
-      response();
+    response();
+  }
+}
+
+function response(){
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == XMLHttpRequest.DONE) {
+      var response = xhr.responseText;
+      alert(response);
+      }
     }
-  }
-
-  function response(){
-    xhr.onreadystatechange = function() {
-          if (xhr.readyState == XMLHttpRequest.DONE) {
-                var response = xhr.responseText;
-            alert(response);
-            }
-        }
-  }
+}
 
   function init() {
     name = document.getElementById("RegistInputUsername").value;

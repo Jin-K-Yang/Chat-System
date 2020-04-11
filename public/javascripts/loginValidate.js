@@ -47,6 +47,8 @@ function checkLoginForm()
 
 
 xhr = new XMLHttpRequest();
+var registStatus = 0;
+var registErr = null;
   
 function send_out(){
 
@@ -60,6 +62,13 @@ function send_out(){
     xhr.send(data);
 
     response();
+
+    if(registStatus == 1){
+      //跳轉
+      window.location.href='login.html';
+    }else{
+      alert(registErr);
+    }
   }
 }
 
@@ -67,7 +76,9 @@ function response(){
   xhr.onreadystatechange = function() {
     if (xhr.readyState == XMLHttpRequest.DONE) {
       var response = xhr.responseText;
-      alert(response);
+      var responseParse = JSON.parse(response);
+      registStatus = responseParse.status;
+      registErr = responseParse.err;
       }
     }
 }

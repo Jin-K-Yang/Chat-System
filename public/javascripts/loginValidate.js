@@ -62,15 +62,6 @@ function send_out(){
     xhr.send(data);
 
     response();
-    alert(registStatus);
-    alert(registErr);
-    if(registStatus == 1){
-      //跳轉
-      alert("註冊成功");
-      window.location.href='login.html';
-    }else{
-      alert(registErr);
-    }
   }
 }
 
@@ -81,6 +72,15 @@ function response(){
       var responseParse = JSON.parse(response);
       registStatus = responseParse.status;
       registErr = responseParse.result;
+      alert(registStatus);
+      alert(registErr);
+      if(registStatus == 1){
+          //跳轉
+          alert("註冊成功");
+          window.location.href='login.html';
+        }else{
+          alert(registErr);
+        }
       }
     }
 }

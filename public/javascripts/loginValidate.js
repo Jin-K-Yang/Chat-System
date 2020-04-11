@@ -78,7 +78,7 @@ function response(){
       var response = xhr.responseText;
       var responseParse = JSON.parse(response);
       registStatus = responseParse.status;
-      registErr = responseParse.err;
+      registErr = responseParse.result;
       }
     }
 }

@@ -49,6 +49,7 @@ function checkLoginForm()
 xhr = new XMLHttpRequest();
   
 function send_out(){
+
   init();
   if(checkRegistForm()){
     var data = "name=" + name + "&email=" + email + "&password=" + password;

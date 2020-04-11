@@ -62,9 +62,11 @@ function send_out(){
     xhr.send(data);
 
     response();
-
+    alert(registStatus);
+    alert(registErr);
     if(registStatus == 1){
       //跳轉
+      alert("註冊成功");
       window.location.href='login.html';
     }else{
       alert(registErr);

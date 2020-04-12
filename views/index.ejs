@@ -3,10 +3,10 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title>personalPage</title>
+		<title>personalPage<%= title%></title>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 		<link rel='stylesheet' href='/nodejs/stylesheets/style.css' />
-<%= title %>
+
 
 		<style type="text/css">.top { margin-bottom: 10px; }</style>
 		<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
@@ -29,10 +29,10 @@
 		              </a>
 		        </li>    
 		        <li style="padding-left: 10%" class="navbar-text">
-    				welcome&nbsp;<%= title %>
+    				welcome&nbsp;
   				</li>
   				<li style="padding-left: 20%"class="nav-item">
-		          <a class="nav-link" href="#">logout</a>
+		          <a id="logout" class="nav-link" href="#">logout</a>
 		        </li>
 		      </ul>
 		    </div>

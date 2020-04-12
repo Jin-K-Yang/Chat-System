@@ -91,4 +91,36 @@ function response(){
     password = document.getElementById("registPassword").value;
   }
 
+/*
+function login(){
+  alert("success");
+  memberdata = document.getElementById("loginUsername").value;
+  password = document.getElementById("loginPassword").value;
+  var data = "name=" + name + "&password=" + password;
+  xhr.open("POST", "http://localhost:3000/member/memberLogin");
+  xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  alert("success");
 
+    xhr.send(data);
+    xhr.onreadystatechange = function() {
+    if (xhr.readyState == XMLHttpRequest.DONE) {
+      var response = xhr.responseText;
+      var responseParse = JSON.parse(response);
+      alert("success");
+
+      console.log(response);
+      
+      if(registStatus == 1){
+          //跳轉
+            alert("success");
+
+          window.location.href='login.html';
+        }else{
+          alert(registErr);
+        }
+      }
+    }
+
+}
+
+*/

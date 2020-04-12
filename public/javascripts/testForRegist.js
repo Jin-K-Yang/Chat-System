@@ -1,8 +1,3 @@
-
-
-
-
-
 //for checking the Register.html's form
 //username and password can't be blank and email have to match the email size
 function checkRegistForm()
@@ -28,22 +23,7 @@ function checkRegistForm()
 }
 
 
-//for checking the login.html's form
-//username and password can't be blank
-function checkLoginForm()
-{
-  var userName = "";
-  userName = document.getElementById("loginUsername");
-  var passWord = "";
-  passWord = document.getElementById("loginPassword");
-  
-  if (userName.value.length <= 0 || passWord.value.length <= 0) 
-  {
-    alert("Please enter correct data");
-    return false;
-   }
-   return( true );
-}
+
 
 
 xhr = new XMLHttpRequest();
@@ -91,4 +71,37 @@ function response(){
     password = document.getElementById("registPassword").value;
   }
 
+//this part may need to change
+/*
+function login(){
+  alert("success");
+  memberdata = document.getElementById("loginUsername").value;
+  password = document.getElementById("loginPassword").value;
+  var data = "name=" + name + "&password=" + password;
+  xhr.open("POST", "http://localhost:3000/member/memberLogin");
+  xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  alert("success");
 
+    xhr.send(data);
+    xhr.onreadystatechange = function() {
+    if (xhr.readyState == XMLHttpRequest.DONE) {
+      var response = xhr.responseText;
+      var responseParse = JSON.parse(response);
+      alert("success");
+
+      console.log(response);
+      
+      if(registStatus == 1){
+          //跳轉
+            alert("success");
+
+          window.location.href='login.html';
+        }else{
+          alert(registErr);
+        }
+      }
+    }
+
+}
+
+*/

@@ -59,7 +59,7 @@ module.exports = class Member{
 			name : req.body.name,
 			password : password,
 		}
-
+		res.header("Access-Control-Allow-Origin","*");
 		loginAction(member_data).then(rows=>{
 			console.log(rows);
 			if(check(rows) === false){

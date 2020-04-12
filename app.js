@@ -1,3 +1,7 @@
+//view for any template that needed
+//controllers for any database connection
+//routes/index.js for form a html
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');

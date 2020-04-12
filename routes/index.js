@@ -3,9 +3,13 @@ var router = express.Router();
 
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { 
-  	title: 'ETestejs'
+/*router.get paremeter /personalPage for url */
+//res.render first paremeter for which view to show
+router.get('/personalpage', function(req, res, next) {
+  res.render('personalpage', { 
+  	title: 'ETestejs',
+  	name: 'bevan222'
+
   	});
 });
 

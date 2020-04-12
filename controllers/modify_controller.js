@@ -65,7 +65,7 @@ module.exports = class Member{
 			if(check(rows) === false){
 				res.json({
 					status : 1,
-					loginUser : rows[0]
+					loginUser : rows[0].name
 				});
 			}
 			else if (check(rows) === true){

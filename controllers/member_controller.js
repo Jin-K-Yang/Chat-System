@@ -2,6 +2,8 @@ const toRegister = require("../models/register_model");
 const encryption = require("../models/encryption");
 const loginAction = require("../models/login_model");
 const check = require("../service/member_check");
+const config = require("../config/development_config.js");
+const jwt = require("jsonwebtoken");
 
 //transform the date to the "yyyy-mm-dd hh:mm:ss" form
 Date.prototype.yyyymmddhhmmss = function() {
@@ -61,8 +63,14 @@ module.exports = class Member{
 		}
 		res.header("Access-Control-Allow-Origin","*");
 		loginAction(member_data).then(rows=>{
-			console.log(rows);
 			if(check(rows) === false){
+				//produce JSON web token
+				const token = jwt.sign({
+					data : rows[0].id
+				}, config.secret, {expiresIn : 60 * 60}) //the token expires in 1 hour
+
+				res.header("token", token); //put token in the response header
+
 				res.json({
 					status : 1,
 					loginname : rows[0].name

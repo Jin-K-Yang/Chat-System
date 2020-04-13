@@ -6,5 +6,6 @@ module.exports = {
 		user : process.env.NAME,
 		password : process.env.PASSWORD,
 		database : process.env.DATABASE
-	}
+	},
+	secret : process.env.MY_SECRET
 }

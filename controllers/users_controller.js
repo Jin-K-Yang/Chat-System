@@ -1,8 +1,9 @@
+
 module.exports = class User{
 	getIndexPage(req, res, next){
 		res.render('personalpage', { 
   			title: 'ETestejs',
-  			name: 'bevan222'
+  			name: req.query.username
   		});
 	}
 }

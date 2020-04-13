@@ -20,6 +20,7 @@ xhr = new XMLHttpRequest();
 var loginStatus = 0;
 var retUsername = "";
 var registErr = null;
+var personalPageUrl = "";
   
 function send_out(){
 
@@ -47,8 +48,10 @@ function response(){
       retUsername = responseParse.loginname;
       if(loginStatus == 1){
           //跳轉
+          personalPageUrl ="http://localhost:3000/users?username=" + retUsername;
+          alert(personalPageUrl);
           alert("成功");
-          window.location.href='http://localhost:3000/users';
+          window.location.href = personalPageUrl;c
         }else{
           alert("fail");
         }

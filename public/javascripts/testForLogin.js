@@ -40,16 +40,15 @@ function response(){
   xhr.onreadystatechange = function() {
 
     //here's the problem
-    alert("go");
     if (xhr.readyState == XMLHttpRequest.DONE) {
       var response = xhr.responseText;
       var responseParse = JSON.parse(response);
       loginStatus = responseParse.status;
       retUsername = responseParse.loginname;
-      if(registStatus == 1){
+      if(loginStatus == 1){
           //跳轉
           alert("成功");
-          window.location.href='http://localhost:3000/personalPage';
+          window.location.href='http://localhost:3000/users';
         }else{
           alert("fail");
         }

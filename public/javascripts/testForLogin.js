@@ -32,26 +32,30 @@ function send_out(){
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
     xhr.send(data);
+    alert('ready to response');
     response();
   }
 }
 
 function response(){
-
   xhr.onreadystatechange = function() {
+      alert('response');
 
     //here's the problem
     if (xhr.readyState == XMLHttpRequest.DONE) {
       var response = xhr.responseText;
       var responseParse = JSON.parse(response);
+      var responseToken = xhr.getResponseHeader('token');
       loginStatus = responseParse.status;
       retUsername = responseParse.loginname;
+      alert(responseToken);
       if(loginStatus == 1){
           //跳轉
+          //set cookie  
+          setCookie(retUsername,0.0001);
           personalPageUrl ="http://localhost:3000/users?username=" + retUsername;
-          alert(personalPageUrl);
           alert("成功");
-          window.location.href = personalPageUrl;c
+          window.location.href = personalPageUrl;
         }else{
           alert("fail");
         }
@@ -63,3 +67,33 @@ function response(){
     name = document.getElementById("loginUsername").value;
     password = document.getElementById("loginPassword").value;
   }
+
+function setCookie(cname,exdays,token){
+    var d = new Date();
+    d.setTime(d.getTime()+(exdays*24*60*60*1000));
+    var expires = "expires="+d.toGMTString();
+    document.cookie = "username=" + cname + "; " + expires;
+    var test = document.cookie;
+    alert(test);
+}
+
+function getCookie(cname){
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i].trim();
+        if (c.indexOf(name)==0) { return c.substring(name.length,c.length); }
+    }
+    return "";
+}
+
+function checkCookie(){
+    var token=getCookie("token");
+    var user= getCookie("username")
+    if (token!=""){
+      personalPageUrl ="http://localhost:3000/users?username=" + user;
+      window.location.href = personalPageUrl;
+    }else{
+      alert('didnt found cookie');
+    }
+}

@@ -40,7 +40,6 @@ function send_out(){
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
     xhr.send(data);
-
     response();
   }
 }
@@ -57,7 +56,7 @@ function response(){
       if(registStatus == 1){
           //跳轉
           alert("註冊成功");
-          window.location.href='login.html';
+          window.location.href='index.html';
         }else{
           alert(registErr);
         }

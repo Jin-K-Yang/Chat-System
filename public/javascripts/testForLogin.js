@@ -52,7 +52,7 @@ function response(){
       if(loginStatus == 1){
           //跳轉
           //set cookie  
-          setCookie(retUsername,0.0001);
+          setCookie(retUsername,0.0001,responseToken);
           personalPageUrl ="http://localhost:3000/users?username=" + retUsername;
           alert("成功");
           window.location.href = personalPageUrl;
@@ -72,7 +72,10 @@ function setCookie(cname,exdays,token){
     var d = new Date();
     d.setTime(d.getTime()+(exdays*24*60*60*1000));
     var expires = "expires="+d.toGMTString();
-    document.cookie = "username=" + cname + "; " + expires;
+    var cookieToken = "token="+token;
+    document.cookie = "username=" + cname;
+    document.cookie = expires;
+    document.cookie = cookieToken;
     var test = document.cookie;
     alert(test);
 }

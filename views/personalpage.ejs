@@ -3,15 +3,31 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title>personalPage<%= title%></title>
+		<title>personalPage<%= title%><%=name%></title>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
 
 		<style type="text/css">.top { margin-bottom: 10px; }</style>
 		<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+		<script src="javascripts/personalPage.js"></script>
+
+		
 		
 	</head>
 	<body>	
+
+		<script type="text/javascript">
+
+			if(getCookie('token') == "" || getCookie('token') == null){
+				alert(document.cookie);
+		      	window.location.href = "http://localhost:3000";
+			}else if(window.location.href == "http://localhost:3000/users"){
+				alert(document.cookie);
+				var personalPageUrl ="http://localhost:3000/users?username=" + getCookie('name') + "&token=" + getCookie('token');
+				alert(personalPageUrl);				
+		      	window.location.href = personalPageUrl;
+			}
+		</script>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
 		  <div class="container">
 		    <a class="navbar-brand" href="#">
@@ -51,11 +67,12 @@
   				<a><img src="img/doggy3.jpg" width="300"></a>
   			</button>
 				
-  			<button onclick="window.location.href='./personalSet.html'" style="margin-left: 15%">
+  			<button onclick="linkPersonalSetURL()" style="margin-left: 15%">
   				<a><img src="img/doggy4.jpg" width="300"></a>
   			</button>
-
   		</div>
-
 	</body>
 </html>
+
+
+

@@ -66,7 +66,7 @@ module.exports = class Member{
 			if(check(rows) === false){
 				//produce JSON web token
 				const token = jwt.sign({
-					data : rows[0].id
+					name : rows[0].name
 				}, config.secret, {expiresIn : 60 * 60}) //the token expires in 1 hour
 
 				res.header("token", token); //put token in the response header

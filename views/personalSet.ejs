@@ -6,51 +6,7 @@
 		<title>loginPage</title>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">c
 		<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
-
-		<script>
-			function setCookie(cname,exdays,token){
-		    var d = new Date();
-		    d.setTime(d.getTime()+(exdays*24*60*60*1000));
-		    var expires = "expires="+d.toGMTString();
-		    var cookieToken = "token="+token;
-		    document.cookie = "username=" + cname;
-		    document.cookie = expires;
-		    document.cookie = cookieToken;
-		    var test = document.cookie;
-		}	
-
-		function checkCookie(){
-		    var token=getCookie("token");
-		    var user= getCookie("username")
-		    if (token!=""){
-		      personalPageUrl ="http://localhost:3000/users?username=" + user + "&token=" + token;
-		      window.location.href = personalPageUrl;
-		    }else{
-		      alert('didnt found cookie');
-		    }
-		}
-
-		function getCookie(cname){
-		    var name = cname + "=";
-		    var ca = document.cookie.split(';');
-		    for(var i=0; i<ca.length; i++) {
-		        var c = ca[i].trim();
-		        if (c.indexOf(name)==0) { return c.substring(name.length,c.length); }
-		    }
-		    return "";
-		}
-
-		function changeText(idName){
-			document.getElementById(idName).outerHTML = 
-		}
-
-		function changeFinish(idName){
-			let changeContent = document.getElementById('edit').value;
-			document.getElementById(idName).outerHTML= "<a id=\"interesting\" class=\"pSetContentBody\">" + changeContent +  "<br><br><br><br><br></a>";
-		}
-
-		</script>
-
+		<script src="/javascripts/personalSet.js"></script>
 	</head>
 	<body>
 
@@ -61,7 +17,7 @@
 		      	window.location.href = "http://localhost:3000";
 			}else if(window.location.href == "http://localhost:3000/users/personalSet"){
 				alert(document.cookie);
-				var personalPageUrl ="http://localhost:3000/users/personalSet?username=" + getCookie('name') + "&token=" + getCookie('token');
+				var personalPageUrl ="http://localhost:3000/users/personalSet?username=" + getCookie('username');
 				alert(personalPageUrl);				
 		      	window.location.href = personalPageUrl;
 			}
@@ -123,13 +79,13 @@
 	  				<a><img src="/img/pencil.jpg" width="20"></a>
 	  			</button>
 				<div class="border border-light pSetCol">
-					<a id="userContent" class="pSetContentBody content">Userdata-content<br><br><br><br><br></a>
+					<a id="userContent" class="pSetContentBody">Userdata-content<br><br><br><br><br></a>
 				</div>
 			</div>
 			<div class="pSetContent border border-primary" style="padding: 3%; margin-top: 5%">
 				<i class="pSetContentTitle">interest in</i>
-				<button style="margin-left: 83.7%">
-	  				<a><img src="/img/pencil.jpg" onclick="changeText('interesting')" width="20"></a>
+				<button onclick="changeText('interesting')" style="margin-left: 83.7%">
+	  				<a><img src="/img/pencil.jpg" width="20"></a>
 	  			</button>
 				<div class="border border-light pSetCol">
 					<a id="interesting" class="pSetContentBody">intersting-content<br><br><br><br><br></a>
@@ -144,6 +100,12 @@
 					<a id="searchFor" class="pSetContentBody">search for-content<br><br><br><br><br></a>
 				</div>
 			</div>
+		</div>
+
+
+		<div>
+			<textarea rows="3"></textarea>
+			<button onclick="console.log(document.getElementById('edit').outerHTML)">Submit</button>
 		</div>
 		
 		

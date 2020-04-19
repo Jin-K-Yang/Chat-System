@@ -16,7 +16,7 @@ function checkCookie(){
     var token=getCookie("token");
     var user= getCookie("username")
     if (token!=""){
-      personalPageUrl ="http://localhost:3000/users?username=" + user + "&token=" + token;
+      personalPageUrl ="http://localhost:3000/users?username=" + user;
       window.location.href = personalPageUrl;
     }else{
       alert('didnt found cookie');
@@ -35,7 +35,7 @@ function getCookie(cname){
 
 function linkPersonalSetURL(){
 	var personalSetURL;
-	personalSetURL= "http://localhost:3000/users/personalSet?username=" + name + "&token=" + getCookie('token');
+	personalSetURL= "http://localhost:3000/users/personalSet?username=" + getCookie('username') ;
 	alert(personalSetURL);
 	window.location.href = personalSetURL;
 }

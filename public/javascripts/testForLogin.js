@@ -52,8 +52,8 @@ function response(){
       if(loginStatus == 1){
           //跳轉
           //set cookie  
-          setCookie(retUsername,0.0001,responseToken);
-          personalPageUrl ="http://localhost:3000/users?username=" + retUsername + "&token=" + responseToken;
+          setCookie(retUsername,1,responseToken);
+          personalPageUrl ="http://localhost:3000/users?username=" + retUsername ;
           alert(personalPageUrl);
           alert("成功");
           window.location.href = personalPageUrl;
@@ -94,8 +94,9 @@ function getCookie(cname){
 function checkCookie(){
     var token=getCookie("token");
     var user= getCookie("username")
+    alert(token);
     if (token!=""){
-      personalPageUrl ="http://localhost:3000/users?username=" + user + "&token=" + token;
+      personalPageUrl ="http://localhost:3000/users?username=" + user ;
       window.location.href = personalPageUrl;
     }else{
       alert('didnt found cookie');

@@ -39,6 +39,16 @@
 		    }
 		    return "";
 		}
+
+		function changeText(idName){
+			document.getElementById(idName).outerHTML = 
+		}
+
+		function changeFinish(idName){
+			let changeContent = document.getElementById('edit').value;
+			document.getElementById(idName).outerHTML= "<a id=\"interesting\" class=\"pSetContentBody\">" + changeContent +  "<br><br><br><br><br></a>";
+		}
+
 		</script>
 
 	</head>
@@ -73,7 +83,7 @@
 		              </a>
 		        </li>    
 		        <li style="padding-left: 10%" class="navbar-text">
-    				welcome&nbsp;acoount111
+    				welcome&nbsp;<%=name%>
   				</li>
   				<li style="padding-left: 20%"class="nav-item">
 		          <a class="nav-link" href="#">logout</a>
@@ -82,32 +92,60 @@
 		    </div>
 		  </div>
 		</nav>
-		<div class="vertical-menu">
+
+		<div class="vertical-menu" style="margin: 2%">
 			<a href="#">Link 1</a>
 			<a href="#">Link 2</a>
 			<a href="#">Link 3</a>
 			<a href="#">Link 4</a>
 		</div>
-		<div class="article">
-			<img class="pSetContent" style="width:20%" src="/img/doggy1.jpg">
-			<div class="pSetContent">
-				<a class="pSetContentTitle">Userdata</a>
+		<div class="vertical-menu" style="float:right ; margin-right: 6%;margin-top: 2%">
+			<a href="#">Link 1</a>
+			<a href="#">Link 2</a>
+			<a href="#">Link 3</a>
+			<a href="#">Link 4</a>
+		</div>
+		<div class="article" style="padding-left: 20%;padding-right: 25%">
+			
+			<div class="border border-primary" style="padding: 3%; margin-top: 5%">
+				<img class="pSetContent" style="width:20%" src="/img/doggy1.jpg">
+				<a style="padding-left:40%;padding-right:21.5% ; font-size: 2.0rem ">資工二</a>
+				
+					<button>
+		  				<a><img src="/img/pencil.jpg" width="20"></a>
+		  			</button>
+	  			
+			</div>
+
+			<div class="pSetContent border border-primary" style="padding: 3%; margin-top: 5%">
+				<i class="pSetContentTitle">Userdata</i>
+				<button style="margin-left: 84%" onclick="changeText('userContent')">
+	  				<a><img src="/img/pencil.jpg" width="20"></a>
+	  			</button>
 				<div class="border border-light pSetCol">
-					<a class="pSetContentBody">Userdata-content<br><br><br><br><br></a>
+					<a id="userContent" class="pSetContentBody content">Userdata-content<br><br><br><br><br></a>
 				</div>
 			</div>
-			<div class="pSetContent">
-				<a class="pSetContentTitle">interest in</a>
+			<div class="pSetContent border border-primary" style="padding: 3%; margin-top: 5%">
+				<i class="pSetContentTitle">interest in</i>
+				<button style="margin-left: 83.7%">
+	  				<a><img src="/img/pencil.jpg" onclick="changeText('interesting')" width="20"></a>
+	  			</button>
 				<div class="border border-light pSetCol">
-					<a class="pSetContentBody">intersting-content<br><br><br><br><br></a>
+					<a id="interesting" class="pSetContentBody">intersting-content<br><br><br><br><br></a>
 				</div>
 			</div>
-			<div class="pSetContent">
-				<a class="pSetContentTitle">search for</a>
+			<div class="pSetContent border border-primary" style="padding: 3%; margin-top: 5%">
+				<i class="pSetContentTitle">search for</i>
+				<button onclick="changeText('searchFor')" style="margin-left: 83.6%">
+	  				<a><img src="/img/pencil.jpg" width="20"></a>
+	  			</button>
 				<div class="border border-light pSetCol">
-					<a class="pSetContentBody">serch for-content<br><br><br><br><br></a>
+					<a id="searchFor" class="pSetContentBody">search for-content<br><br><br><br><br></a>
 				</div>
 			</div>
 		</div>
+		
+		
 	</body>
 </html>

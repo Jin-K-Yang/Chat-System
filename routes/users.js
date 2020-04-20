@@ -10,6 +10,8 @@ usersMethod = new UsersModifyMethod();
 
 router.get('/', usersMethod.getIndexPage);
 
+router.get("/:name/profile", usersMethod.getProfile);
+
 router.put("/update", usersMethod.putUpdate);
 
 module.exports = router;

@@ -28,6 +28,10 @@ module.exports = class User{
   		});
 	}
 
+	getProfile(req, res, next){
+		
+	}
+
 	putUpdate(req, res, next){
 		const token = req.headers['token'];
 		//check token input

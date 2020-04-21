@@ -2,6 +2,7 @@ const checkNULL = require("../service/member_check.js");
 const verify = require("../models/verification_model.js");
 const updateAction = require("../models/update_model.js");
 const onTime = require("../service/onTime.js");
+const getprofileAction = require("../models/getprofile_model.js");
 
 //transform the date to the "yyyy-mm-dd hh:mm:ss" form
 /*Date.prototype.yyyymmddhhmmss = function() {
@@ -28,8 +29,57 @@ module.exports = class User{
   		});
 	}
 
+	getpersonalSetPage(req, res, next){
+		res.render('personalSet', { 
+  			title: 'ETestejs',
+  			name: req.query.username,
+  			token:req.query.token
+  		});
+	}
+
 	getProfile(req, res, next){
-		
+		const token = req.cookies.token;
+		const name = req.params.name;
+
+		if(checkNULL(token) === true){
+			res.json({
+				status : 0,
+				err : "no token"
+			});
+		}
+		else if (checkNULL(token) === false){
+			verify(token).then(tokenResult=>{
+				if(tokenResult === false || tokenResult != name){
+					res.json({
+						status : 0,
+						err : "token wrong"
+					});
+				}
+				else{
+					getprofileAction(name).then((rows)=>{
+						if(checkNULL(rows) === true){
+							res.json({
+								status : 0,
+								err : "wrong user name"
+							});
+						}
+						else{
+							res.json({
+								status : 1,
+								interesting : rows[0].interesting,
+								attempt : rows[0].attempt,
+								introduction : rows[0].introduction
+							});
+						}
+					}, (err)=>{
+						res.json({
+							status : 0,
+							err : err
+						});
+					})
+				}
+			})
+		}
 	}
 
 	putUpdate(req, res, next){

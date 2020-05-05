@@ -97,10 +97,19 @@ function init() {
 }
 
 var failureCallback;
+var xhr = new XMLHttpRequest();
+
 
 async function sendVerify(){
 
-    var verifyURL = "http://localhost:3000/verify/" + getCookie("username");
+    if(getCookie("username") == ""){
+      alert("can't find cookie");
+      window.location.href= "http://localhost:3000";
+    }else{
+      alert('send verify');
+      var verifyURL = "http://localhost:3000/verify/" + getCookie("username");
+    }
+    var data;
     xhr.open("GET", verifyURL);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 

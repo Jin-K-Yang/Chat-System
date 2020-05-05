@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+	<!DOCTYPE HTML>
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -19,15 +19,7 @@
 
 		<script type="text/javascript">
 
-			if(getCookie('token') == "" || getCookie('token') == null){
-				alert(document.cookie);
-		      	window.location.href = "http://localhost:3000";
-			}else if(window.location.href == "http://localhost:3000/users"){
-				alert(document.cookie);
-				var personalPageUrl ="http://localhost:3000/users?username=" + getCookie('name') + "&token=" + getCookie('token');
-				alert(personalPageUrl);				
-		      	window.location.href = personalPageUrl;
-			}
+			sendVerify();
 		</script>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
 		  <div class="container">

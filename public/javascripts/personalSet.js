@@ -12,17 +12,6 @@ function setCookie(cname,exdays,token){
     var test = document.cookie;
 }	
 
-function checkCookie(){
-    var token=getCookie("token");
-    var user= getCookie("username")
-    if (token!=""){
-      personalPageUrl ="http://localhost:3000/users?username=" + user;
-      window.location.href = personalPageUrl;
-    }else{
-      alert('didnt found cookie');
-    }
-}
-
 
 function getCookie(cname){
     var name = cname + "=";
@@ -155,8 +144,13 @@ function GPSDresponse(){
 var failureCallback;
 
 async function sendVerify(){
-
-    var verifyURL = "http://localhost:3000/verify/" + getCookie("username");
+    if(getCookie("username") == ""){
+      alert("can't find cookie");
+      window.location.href= "http://localhost:3000";
+    }else{
+      alert('send verify');
+      var verifyURL = "http://localhost:3000/verify/" + getCookie("username");
+    }
     xhr.open("GET", verifyURL);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 

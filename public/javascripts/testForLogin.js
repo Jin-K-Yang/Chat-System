@@ -102,3 +102,73 @@ function checkCookie(){
       alert('didnt found cookie');
     }
 }
+
+
+var failureCallback;
+
+async function sendVerify(){
+    if(getCookie("username") == ""){
+      alert("can't find cookie");
+      var verifyURL = "http://localhost:3000/verify/1";
+    }else{
+      alert('send verify');
+      var verifyURL = "http://localhost:3000/verify/" + getCookie("username");
+    }
+    var data;
+    xhr.open("GET", verifyURL);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+    xhr.send(data);
+    console.log('ready to response'); 
+    var verifyStatus; 
+    verifyResponse().then((result)=>{
+        if(result === "success"){
+        console.log('verify success');
+    }
+    }).catch(() =>{
+        deleteAllCookies();
+        window.location.href = "http://localhost:3000";
+        console.log('verify fail of catch');
+    });
+}
+
+function verifyResponse(){
+    return new Promise ((resolve, reject)=>{
+  xhr.onreadystatechange = function() {
+
+        //here's the problem
+        
+            if (xhr.readyState == XMLHttpRequest.DONE) {
+                console.log('getResponse');
+                var response = xhr.responseText;
+                var responseParse = JSON.parse(response);
+                if(responseParse.status == 1){
+                    resolve("success");
+                    
+                }else{
+                    reject("fail");
+                    
+                }
+            }
+    }
+    })
+}
+
+function deleteAllCookies() {
+    var cookies = document.cookie.split("; ");
+    for (var c = 0; c < cookies.length; c++) {
+        var d = window.location.hostname.split(".");
+        while (d.length > 0) {
+            var cookieBase = encodeURIComponent(cookies[c].split(";")[0].split("=")[0]) + '=; expires=Thu, 01-Jan-1970 00:00:01 GMT; domain=' + d.join('.') + ' ;path=';
+            var p = location.pathname.split('/');
+            document.cookie = cookieBase + '/';
+            while (p.length > 0) {
+                document.cookie = cookieBase + p.join('/');
+                p.pop();
+            };
+            d.shift();
+        }
+    }
+};
+
+

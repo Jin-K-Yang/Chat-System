@@ -41,3 +41,120 @@ function linkPersonalSetURL(){
 }
 
 
+function send_out(idName){
+
+  init( );
+  if(true){
+    if(idName == 'userContent'){
+        data = "introduction=" + changeData;
+        xhr.open("PUT", "http://localhost:3000/users/update");
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader('token',getCookie('token'));
+
+        xhr.send(data);
+        response(idName);
+    }else if(idName=='searchFor'){
+        data = "attempt=" + changeData;
+        xhr.open("PUT", "http://localhost:3000/users/update");
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader('token',getCookie('token'));
+
+        xhr.send(data);
+        response(idName);
+    }else if(idName=='interesting'){
+        data = "interesting=" + changeData;
+        xhr.open("PUT", "http://localhost:3000/users/update");
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader('token',getCookie('token'));
+
+        xhr.send(data);
+        response(idName);
+    }
+    
+  }
+}
+
+function response(idName){
+  xhr.onreadystatechange = function() {
+
+    //here's the problem
+    if (xhr.readyState == XMLHttpRequest.DONE) {
+      var response = xhr.responseText;
+      var responseParse = JSON.parse(response);
+      if(responseParse.status == 1){
+          //跳轉
+          //set cookie  
+          changeFinish(idName);
+        }else{
+          alert("fail");
+        }
+      }
+    }
+}
+
+function init() {
+    changeData = document.getElementById('edit').value;
+}
+
+var failureCallback;
+
+async function sendVerify(){
+
+    var verifyURL = "http://localhost:3000/verify/" + getCookie("username");
+    xhr.open("GET", verifyURL);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+    xhr.send(data);
+    console.log('ready to response'); 
+    var verifyStatus; 
+    verifyResponse().then((result)=>{
+        if(result === "success"){
+        console.log('verify success');
+    }
+    }).catch(() =>{
+        deleteAllCookies();
+        window.location.href = "http://localhost:3000";
+        console.log('verify fail of catch');
+    });
+}
+
+function verifyResponse(){
+    return new Promise ((resolve, reject)=>{
+  xhr.onreadystatechange = function() {
+
+        //here's the problem
+        
+            if (xhr.readyState == XMLHttpRequest.DONE) {
+                console.log('getResponse');
+                var response = xhr.responseText;
+                var responseParse = JSON.parse(response);
+                if(responseParse.status == 1){
+                    resolve("success");
+                    
+                }else{
+                    reject("fail");
+                    
+                }
+            }
+    }
+    })
+}
+
+function deleteAllCookies() {
+    var cookies = document.cookie.split("; ");
+    for (var c = 0; c < cookies.length; c++) {
+        var d = window.location.hostname.split(".");
+        while (d.length > 0) {
+            var cookieBase = encodeURIComponent(cookies[c].split(";")[0].split("=")[0]) + '=; expires=Thu, 01-Jan-1970 00:00:01 GMT; domain=' + d.join('.') + ' ;path=';
+            var p = location.pathname.split('/');
+            document.cookie = cookieBase + '/';
+            while (p.length > 0) {
+                document.cookie = cookieBase + p.join('/');
+                p.pop();
+            };
+            d.shift();
+        }
+    }
+};
+
+

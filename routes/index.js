@@ -14,4 +14,14 @@ router.get('/personalpage', function(req, res, next) {
   	});
 });
 
+router.get('/personalSet', function(req, res, next) {
+  res.render('personalSet', { 
+  	title: 'ETestejs',
+  	name: 'bevan222'
+
+  	});
+});
+
+
+
 module.exports = router;

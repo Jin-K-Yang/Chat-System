@@ -4,24 +4,34 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<title>loginPage</title>
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">c
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
-		<script src="/javascripts/personalSet.js"></script>
+		<script src="../javascripts/personalSet.js"></script>
 	</head>
 	<body>
-
-		<script type="text/javascript">
-
-			if(getCookie('token') == "" || getCookie('token') == null){
-				alert(document.cookie);
-		      	window.location.href = "http://localhost:3000";
-			}else if(window.location.href == "http://localhost:3000/users/personalSet"){
-				alert(document.cookie);
-				var personalPageUrl ="http://localhost:3000/users/personalSet?username=" + getCookie('username');
-				alert(personalPageUrl);				
-		      	window.location.href = personalPageUrl;
+		
+		<script type="text/javascript">	
+			if(getCookie('token') == ''){
+				window.location.href = "http://localhost:3000";
+			}else{
+				sendVerify();
 			}
+			//problem
+
+			/*
+			window.onload = function(){
+			if(verify){
+				alert('go in web');
+				getPersonSetData();
+			}else{
+				alert('go back to login');
+		      	window.location.href = "http://localhost:3000";
+			}
+		}
+		*/
+		
 		</script>
+		
 
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
 		  <div class="container">
@@ -105,7 +115,7 @@
 
 		<div>
 			<textarea rows="3"></textarea>
-			<button onclick="console.log(document.getElementById('edit').outerHTML)">Submit</button>
+			<button onclick="deleteAllCookies()"><%= name %></button>
 		</div>
 		
 		

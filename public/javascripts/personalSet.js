@@ -150,6 +150,7 @@ async function sendVerify(){
     }else{
       alert('send verify');
       var verifyURL = "http://localhost:3000/verify/" + getCookie("username");
+      console.log(verifyURL);
     }
     xhr.open("GET", verifyURL);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');

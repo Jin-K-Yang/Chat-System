@@ -12,17 +12,6 @@ function setCookie(cname,exdays,token){
     alert(test);
 }	
 
-function checkCookie(){
-    var token=getCookie("token");
-    var user= getCookie("username")
-    if (token!=""){
-      personalPageUrl ="http://localhost:3000/users?username=" + user;
-      window.location.href = personalPageUrl;
-    }else{
-      alert('didnt found cookie');
-    }
-}
-
 function getCookie(cname){
     var name = cname + "=";
     var ca = document.cookie.split(';');
@@ -35,7 +24,7 @@ function getCookie(cname){
 
 function linkPersonalSetURL(){
 	var personalSetURL;
-	personalSetURL= "http://localhost:3000/users/personalSet?username=" + getCookie('username') ;
+	personalSetURL= "http://localhost:3000/users/personalSet";
 	alert(personalSetURL);
 	window.location.href = personalSetURL;
 }

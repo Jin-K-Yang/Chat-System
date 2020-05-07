@@ -1,6 +1,3 @@
-
-
-
 function setCookie(cname,exdays,token){
     var d = new Date();
     d.setTime(d.getTime()+(exdays*24*60*60*1000));
@@ -27,7 +24,6 @@ function getCookie(cname){
 function changeText(idName){
     alert(idName);  
     var changeTag = "<textarea id=\"edit\" class=\"form-control form-control-lg\" rows=\"3\"></textarea><button id=\"check\" onclick=\"send_out(\'"+ idName +"\')\">Submit</button>";
-    
     document.getElementById(idName).outerHTML = changeTag;
 }
 
@@ -38,8 +34,6 @@ function changeFinish(idName){
     document.getElementById('edit').outerHTML= "<a id=\"" +idName+ "\" class=\"pSetContentBody\">"+changeContent+"<br><br><br><br><br></a>";
     document.getElementById('check').outerHTML = '';
 }
-
-
 
 var xhr = new XMLHttpRequest();
 var changeData ="";
@@ -207,4 +201,14 @@ function deleteAllCookies() {
             d.shift();
         }
     }
-};
+}
+
+
+function logout(){
+    deleteAllCookies();
+    sendVerify();
+    alert('logout success');
+}
+
+
+

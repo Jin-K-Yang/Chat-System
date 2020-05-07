@@ -24,70 +24,34 @@ function getCookie(cname){
 
 function linkPersonalSetURL(){
 	var personalSetURL;
-	personalSetURL= "http://localhost:3000/users/personalSet";
-	alert(personalSetURL);
+	personalSetURL= "http://localhost:3000/users/personalset";
 	window.location.href = personalSetURL;
 }
 
 
-function send_out(idName){
 
-  init( );
-  if(true){
-    if(idName == 'userContent'){
-        data = "introduction=" + changeData;
-        xhr.open("PUT", "http://localhost:3000/users/update");
-        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        xhr.setRequestHeader('token',getCookie('token'));
-
-        xhr.send(data);
-        response(idName);
-    }else if(idName=='searchFor'){
-        data = "attempt=" + changeData;
-        xhr.open("PUT", "http://localhost:3000/users/update");
-        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        xhr.setRequestHeader('token',getCookie('token'));
-
-        xhr.send(data);
-        response(idName);
-    }else if(idName=='interesting'){
-        data = "interesting=" + changeData;
-        xhr.open("PUT", "http://localhost:3000/users/update");
-        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        xhr.setRequestHeader('token',getCookie('token'));
-
-        xhr.send(data);
-        response(idName);
-    }
-    
-  }
-}
 
 function response(idName){
-  xhr.onreadystatechange = function() {
+    xhr.onreadystatechange = function() {
 
     //here's the problem
-    if (xhr.readyState == XMLHttpRequest.DONE) {
-      var response = xhr.responseText;
-      var responseParse = JSON.parse(response);
-      if(responseParse.status == 1){
-          //跳轉
-          //set cookie  
-          changeFinish(idName);
-        }else{
-          alert("fail");
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            var response = JSON.parse(xhr.responseText);
+            if(response.status == 1){  
+                changeFinish(idName);
+            }else{
+                alert("fail");
+            }
         }
-      }
-    }
+    }   
 }
 
-function init() {
-    changeData = document.getElementById('edit').value;
-}
 
 var failureCallback;
 var xhr = new XMLHttpRequest();
 
+
+//verify account
 
 async function sendVerify(){
 
@@ -118,10 +82,7 @@ async function sendVerify(){
 
 function verifyResponse(){
     return new Promise ((resolve, reject)=>{
-  xhr.onreadystatechange = function() {
-
-        //here's the problem
-        
+        xhr.onreadystatechange = function() {
             if (xhr.readyState == XMLHttpRequest.DONE) {
                 console.log('getResponse');
                 var response = xhr.responseText;
@@ -134,7 +95,7 @@ function verifyResponse(){
                     
                 }
             }
-    }
+        }
     })
 }
 
@@ -153,6 +114,13 @@ function deleteAllCookies() {
             d.shift();
         }
     }
-};
+}
+
+
+function logout(){
+    deleteAllCookies();
+    sendVerify();
+    alert('logout success');
+}
 
 

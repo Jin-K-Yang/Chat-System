@@ -64,10 +64,10 @@ function response(){
     }
 }
 
-  function init() {
-    name = document.getElementById("loginUsername").value;
-    password = document.getElementById("loginPassword").value;
-  }
+function init() {
+  name = document.getElementById("loginUsername").value;
+  password = document.getElementById("loginPassword").value;
+}
 
 function setCookie(cname,exdays,token){
     var d = new Date();
@@ -110,9 +110,9 @@ async function sendVerify(){
     var verifyStatus; 
     verifyResponse().then((result)=>{
         if(result === "success"){
-        console.log('verify success');
-        window.location.href = "http://localhost:3000/users"
-    }
+          console.log('verify success');
+          window.location.href = "http://localhost:3000/users"
+        }
     }).catch(() =>{
         deleteAllCookies();
         window.location.href = "http://localhost:3000";
@@ -121,25 +121,21 @@ async function sendVerify(){
 }
 
 function verifyResponse(){
-    return new Promise ((resolve, reject)=>{
-  xhr.onreadystatechange = function() {
-
-        //here's the problem
-        
-            if (xhr.readyState == XMLHttpRequest.DONE) {
-                console.log('getResponse');
-                var response = xhr.responseText;
-                var responseParse = JSON.parse(response);
-                if(responseParse.status == 1){
-                    resolve("success");
-                    
-                }else{
-                    reject("fail");
-                    
-                }
-            }
+  return new Promise ((resolve, reject)=>{
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == XMLHttpRequest.DONE) {
+        console.log('getResponse');
+        var response = xhr.responseText;
+        var responseParse = JSON.parse(response);
+        if(responseParse.status == 1){
+            resolve("success");
+            
+        }else{
+            reject("fail");
+        }
+      }
     }
-    })
+  })
 }
 
 function deleteAllCookies() {

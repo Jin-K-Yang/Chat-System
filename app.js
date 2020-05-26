@@ -9,11 +9,18 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 
+
+
+
+
 //get any variable needed
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var memberRouter = require("./routes/member");
 var verifyRouter = require("./routes/verification");
+
+//new
+//var roomListRouter = require("./routes/roomList");
 
 var app = express();
 
@@ -33,6 +40,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use("/member", memberRouter);
 app.use("/verify", verifyRouter);
+//app.use("/roomList",roomListRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -51,3 +59,4 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+

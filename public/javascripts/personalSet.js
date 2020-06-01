@@ -47,7 +47,7 @@ function send_out(idName){
   if(true){
     if(idName == 'userContent'){
         data = "introduction=" + changeData;
-        xhr.open("PUT", "http://localhost:3000/users/update");
+        xhr.open("PUT", "http://203.204.231.25:3000/users/update");
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhr.setRequestHeader('token',getCookie('token'));
 
@@ -55,7 +55,7 @@ function send_out(idName){
         response(idName);
     }else if(idName=='searchFor'){
         data = "attempt=" + changeData;
-        xhr.open("PUT", "http://localhost:3000/users/update");
+        xhr.open("PUT", "http://203.204.231.25:3000/users/update");
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhr.setRequestHeader('token',getCookie('token'));
 
@@ -63,7 +63,7 @@ function send_out(idName){
         response(idName);
     }else if(idName=='interesting'){
         data = "interesting=" + changeData;
-        xhr.open("PUT", "http://localhost:3000/users/update");
+        xhr.open("PUT", "http://203.204.231.25:3000/users/update");
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhr.setRequestHeader('token',getCookie('token'));
 
@@ -100,7 +100,7 @@ function init() {
 
 function getPersonSetData(){
     data = "";
-    var xhrURL = "http://localhost:3000/users/" + getCookie('username') + "/profile";
+    var xhrURL = "http://203.204.231.25:3000/users/" + getCookie('username') + "/profile";
     xhr.open("GET", xhrURL);
 
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -140,10 +140,10 @@ var failureCallback;
 async function sendVerify(){
     if(getCookie("username") == ""){
       alert("can't find cookie");
-      window.location.href= "http://localhost:3000";
+      window.location.href= "http://203.204.231.25:3000";
     }else{
       alert('send verify');
-      var verifyURL = "http://localhost:3000/verify/" + getCookie("username");
+      var verifyURL = "http://203.204.231.25:3000/verify/" + getCookie("username");
       console.log(verifyURL);
     }
     xhr.open("GET", verifyURL);
@@ -159,7 +159,7 @@ async function sendVerify(){
     }
     }).catch(() =>{
         deleteAllCookies();
-        window.location.href = "http://localhost:3000";
+        window.location.href = "http://203.204.231.25:3000";
         console.log('verify fail of catch');
     });
 }

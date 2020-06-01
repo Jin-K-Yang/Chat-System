@@ -24,7 +24,7 @@ function getCookie(cname){
 
 function linkPersonalSetURL(){
 	var personalSetURL;
-	personalSetURL= "http://localhost:3000/users/personalset";
+	personalSetURL= "http://203.204.231.25:3000/users/personalset";
 	window.location.href = personalSetURL;
 }
 
@@ -57,10 +57,10 @@ async function sendVerify(){
 
     if(getCookie("username") == ""){
       alert("can't find cookie");
-      window.location.href= "http://localhost:3000";
+      window.location.href= "http://203.204.231.25:3000";
     }else{
       alert('send verify');
-      var verifyURL = "http://localhost:3000/verify/" + getCookie("username");
+      var verifyURL = "http://203.204.231.25:3000/verify/" + getCookie("username");
     }
     var data;
     xhr.open("GET", verifyURL);
@@ -75,7 +75,7 @@ async function sendVerify(){
     }
     }).catch(() =>{
         deleteAllCookies();
-        window.location.href = "http://localhost:3000";
+        window.location.href = "http://203.204.231.25:3000";
         console.log('verify fail of catch');
     });
 }

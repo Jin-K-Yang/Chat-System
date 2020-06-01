@@ -36,7 +36,7 @@ function send_out(){
   if(checkRegistForm()){
     var data = "name=" + name + "&email=" + email + "&password=" + password;
 
-    xhr.open("POST", "http://localhost:3000/member/register");
+    xhr.open("POST", "http://203.204.231.25:3000/member/register");
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
     xhr.send(data);

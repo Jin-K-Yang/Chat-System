@@ -28,7 +28,7 @@ function send_out(){
   if(checkLoginForm()){
     var data = "name=" + name + "&password=" + password;
 
-    xhr.open("POST", "http://localhost:3000/member/login");
+    xhr.open("POST", "http://203.204.231.25:3000/member/login");
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
     xhr.send(data);
@@ -53,7 +53,7 @@ function response(){
           //跳轉
           //set cookie  
           setCookie(retUsername,1,responseToken);
-          personalPageUrl ="http://localhost:3000/users";
+          personalPageUrl ="http://203.204.231.25:3000/users";
           alert(personalPageUrl);
           alert("成功");
           window.location.href = personalPageUrl;
@@ -96,10 +96,10 @@ var failureCallback;
 async function sendVerify(){
     if(getCookie("username") == ""){
       alert("can't find cookie");
-      var verifyURL = "http://localhost:3000/verify/1";
+      var verifyURL = "http://203.204.231.25:3000/verify/1";
     }else{
       alert('send verify');
-      var verifyURL = "http://localhost:3000/verify/" + getCookie("username");
+      var verifyURL = "http://203.204.231.25:3000/verify/" + getCookie("username");
     }
     var data;
     xhr.open("GET", verifyURL);
@@ -111,11 +111,11 @@ async function sendVerify(){
     verifyResponse().then((result)=>{
         if(result === "success"){
           console.log('verify success');
-          window.location.href = "http://localhost:3000/users"
+          window.location.href = "http://203.204.231.25:3000/users"
         }
     }).catch(() =>{
         deleteAllCookies();
-        window.location.href = "http://localhost:3000";
+        window.location.href = "http://203.204.231.25:3000";
         console.log('verify fail of catch');
     });
 }

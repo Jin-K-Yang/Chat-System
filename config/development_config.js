@@ -10,4 +10,3 @@ module.exports = {
 	secret : process.env.MY_SECRET
 }
 
-export { connect_info as connect_info };

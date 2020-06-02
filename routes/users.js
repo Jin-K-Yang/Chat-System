@@ -28,7 +28,7 @@ router.get('/roomList', function(req, res, next) {
 //test roomID
 router.get('/test/:roomID', function(req, res, next) {
   res.render('test', { 
-    title: req.query.chatRoom,
+    title: req.query.roomID,
     name: 'bevan222'
 
     });

@@ -1,4 +1,4 @@
-const conf = require("/config/development_config.js");
+const conf = require("../config/development_config.js");
 
 
 function setCookie(cname,exdays,token){

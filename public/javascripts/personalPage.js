@@ -1,3 +1,4 @@
+const conf = require("../config/development_config.js");
 
 
 function setCookie(cname,exdays,token){
@@ -24,7 +25,7 @@ function getCookie(cname){
 
 function linkPersonalSetURL(){
 	var personalSetURL;
-	personalSetURL= "http://203.204.231.25:3000/users/personalset";
+	personalSetURL= "http://" + conf.connect_info.host + ":3000/users/personalset";
 	window.location.href = personalSetURL;
 }
 

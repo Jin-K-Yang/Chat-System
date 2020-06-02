@@ -1,4 +1,3 @@
-const env = require("../.env");
 
 
 function setCookie(cname,exdays,token){

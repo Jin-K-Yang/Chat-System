@@ -1,4 +1,3 @@
-require("dotenv").config();
 
 function setCookie(cname,exdays,token){
     var d = new Date();

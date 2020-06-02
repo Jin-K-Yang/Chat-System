@@ -25,6 +25,15 @@ router.get('/roomList', function(req, res, next) {
   	});
 });
 
+//test roomID
+router.get('/test/:roomID', function(req, res, next) {
+  res.render('test', { 
+    title: req.query.chatRoom,
+    name: 'bevan222'
+
+    });
+});
+
 
 router.get('/chatRoom', function(req, res, next) {
   res.render('room', { 
@@ -34,13 +43,7 @@ router.get('/chatRoom', function(req, res, next) {
   	});
 });
 
-router.get('/test', function(req, res, next) {
-  res.render('test', { 
-    title: 'ETestejs',
-    name: 'bevan222'
 
-    });
-});
 
 router.put("/update", usersMethod.putUpdate);
 

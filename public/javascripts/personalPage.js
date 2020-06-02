@@ -1,3 +1,4 @@
+require("dotenv").config();
 
 
 function setCookie(cname,exdays,token){

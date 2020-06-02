@@ -1,3 +1,6 @@
+const env = require("../.env");
+
+
 function setCookie(cname,exdays,token){
     var d = new Date();
     d.setTime(d.getTime()+(exdays*24*60*60*1000));

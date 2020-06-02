@@ -23,7 +23,7 @@ function getCookie(cname){
 
 function linkPersonalSetURL(){
 	var personalSetURL;
-	personalSetURL= "http://" + process.env.HOST + ":3000/users/personalset";
+	personalSetURL= "http://203.204.231.25:3000/users/personalset";
 	window.location.href = personalSetURL;
 }
 

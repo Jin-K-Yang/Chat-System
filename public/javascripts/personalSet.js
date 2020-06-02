@@ -138,9 +138,10 @@ function GPSDresponse(){
 var failureCallback;
 
 async function sendVerify(){
-    if(getCookie("username") == ""){
-      alert("can't find cookie");
-      window.location.href= "http://203.204.231.25:3000";
+    if(getCookie("username") == "" || getCookie("token") == ""){
+        deleteAllCookies();
+        alert("can't find cookie");
+        window.location.href= "http://203.204.231.25:3000";
     }else{
       alert('send verify');
       var verifyURL = "http://203.204.231.25:3000/verify/" + getCookie("username");

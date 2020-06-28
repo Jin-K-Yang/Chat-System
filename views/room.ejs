@@ -1,122 +1,91 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head lang="en">
-  <meta charset="UTF-8">
-  <title>{{roomID}}</title>
-  <style>
-    #msglog, #messageInput {
-      border: 1px solid #ccc;
-      width: 500px;
-      height: 350px;
-      overflow-y: auto;
-      font-size: 14px;
-    }
-    #messageInput {
-      height: 80px;
-    }
-    .message {
-      line-height: 22px;
-    }
-    .message .user {
-      padding-right: 5px;
-      padding-left: 5px;
-      color: brown;
-    }
-    .sysMsg {
-      color: #c1bfbf;
-      padding-right: 5px;
-      padding-left: 5px;
-      font-size: 12px;
-    }
-    #users {
-      width: 490px;
-      padding: 0 5px 5px;
-    }
-  </style>
-  
+  <head>
+    <title><%=title%></title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; }
+      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      form input { border: 0; padding: 10px; width: 90%; margin-right: 0.5%; }
+      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages li { padding: 5px 10px; }
+      #messages li:nth-child(odd) { background: #eee; }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="../javascripts/room.js"></script>
+  </head>
+  <body>
+    
+		<script type="text/javascript">
+      sendVerify();
+      roomVerify();
+			window.onload = function(){
+        //roomVerify();
+				document.getElementById('welcome').innerHTML = "welcome " + getCookie('username');
+        console.log(getCookie("username"));
+        firstTimeLoad();
+			}
 
-</head>
-<body>
-  昵称: <span id="userName"></span> <br/>
-  房间: {{roomID}} <br/>
-  当前在线人数: <span id="count">{{users.length}}</span> <br/>
-  在线用户:  <div id="users">{{users}}</div>
+    </script>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+		  <div class="container">
+		    <a class="navbar-brand" href="#">
+		          <img src="http://placehold.it/150x50?text=Logo" alt="">
+		        </a>
+		    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+		          <span class="navbar-toggler-icon"></span>
+		        </button>
+		    <div class="collapse navbar-collapse" id="navbarResponsive">
+		      <ul class="navbar-nav ml-auto">
+		        <li class="nav-item active">
+              <a href="http://203.204.231.25:3000/users"
+		           class="nav-link" href="#">Home
+		                <span class="sr-only">(current)</span>
+		              </a>
+		        </li>    
+		        <li id="welcome" style="padding-left: 10%" class="navbar-text">
+    				welcome&nbsp;
+  				</li>
+  				<li style="padding-left: 20%"class="nav-item">
+		          <a onclick="logout()" id="logout" class="nav-link" href="#">logout</a>
+		        </li>
+		      </ul>
+		    </div>
+		  </div>
+    </nav>
+    <button onclick="getMessage()">更早訊息</button>
+    <ul id="messages"></ul>
+    <form action="">
+      <input id="m" autocomplete="off" /><button>Send</button>
+    </form>
 
-  <div id="msglog">
-
-  </div>
-  <textarea name="message" id="messageInput"></textarea>
-  <br/>
-  按Enter键发送
-  <button id="joinOrLeave">退出房间</button>
-
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-  <script>
-    $(function () {
-      // ----------设置昵称-------------
-      var userName = '';
-      while ($('#userName').text().trim() === '') {
-        userName = prompt("请设置你的昵称","");
-        $('#userName').text(userName);
-      }
-
- 
-      // ---------创建连接-----------
-      var socket = io();
-
-      // 加入房间
-      socket.on('connect', function () {
-        socket.emit('join', userName);
+    <script>
+      $(function () {
+        var socket = io.connect('http://203.204.231.25:3001');
+        $('form').submit(function(e){
+          e.preventDefault(); // prevents page reloading
+          if( $('#m').val() != ""){
+            socket.emit('message', "[" + d.getHours() + ":" + d.getMinutes() + "] " + getCookie("username") +" : " + $('#m').val());
+            messageOut();
+            $('#m').val('');
+          }else{
+            return false;
+          }
+        });
+        socket.on('message', function(msg){
+          var d = new Date();
+          $('#messages').append($('<li>').text(msg));
+        });
       });
-
-      // 监听消息
-      socket.on('msg', function (userName, msg) {
-        var message = '' +
-            '<div class="message">' +
-            '  <span class="user">' + userName + ': </span>' +
-            '  <span class="msg">' + msg + '</span>' +
-            '</div>';
-        $('#msglog').append(message);
-        // 滚动条保持最下方
-        $('#msglog').scrollTop($('#msglog')[0].scrollHeight);  
-      });
-
-      // 监听系统消息
-      socket.on('sys', function (sysMsg, users) {
-        var message = '<div class="sysMsg">' + sysMsg + '</div>';
-        $('#msglog').append(message);
-
-        $('#count').text(users.length);
-        $('#users').text(users);
-      });
-
-      // 发送消息
-      $('#messageInput').keydown(function (e) {
-        if (e.which === 13) {
-          e.preventDefault();
-          var msg = $(this).val();
-          $(this).val('');
-
-          socket.send(msg);
-        }
-      });
-
-      // 退出房间
-      $('#joinOrLeave').click(function () {
-        if ($(this).text() === '退出房间') {
-          $(this).text('进入房间');
-          socket.emit('leave');
-          var msg = '你已经退出了房间,重新发言请点击"进入房间"';
-          $('#msglog').append('<div class="sysMsg">'+msg+'</div>');
-        } else {
-          $(this).text('退出房间');
-          socket.emit('join', userName);
-        }
-
-      });
-    });
-  </script>
-</body>
+    </script>
+  </body>
 </html>
+
+
+
+
+
+

@@ -1,19 +1,16 @@
-	<!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <html>
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title>personalPage</title>
+		<title>loginPage</title>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
-
 		<style type="text/css">.top { margin-bottom: 10px; }</style>
-		<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
-		<script src="javascripts/personalPage.js"></script>
-		
+		<script src="../javascripts/createRoom.js"></script>
+
 		
 	</head>
-	<body>	
+	<body>
 
 		<script type="text/javascript">
 
@@ -35,7 +32,7 @@
 		    <div class="collapse navbar-collapse" id="navbarResponsive">
 		      <ul class="navbar-nav ml-auto">
 		        <li class="nav-item active">
-		          <a href="http://203.204.231.25:3000/users"
+				  <a href="http://203.204.231.25:3000/users"
 		           class="nav-link" href="#">Home
 		                <span class="sr-only">(current)</span>
 		              </a>
@@ -50,27 +47,30 @@
 		    </div>
 		  </div>
 		</nav>
+		
 
-		<div style="padding-left: 27.5%;padding-top: 5%">
-	  		<button onclick="window.location.href='https://finance.yahoo.com/calendar/earnings?from=2020-04-12&to=2020-04-18&day=2020-04-15'">
-	  			<a><img src="img/doggy1.jpg" width="300"></a>
-	  		</button>
-	  		<button onclick="window.location.href='http://203.204.231.25:3000/users/test/1234'" style="margin-left: 15%">
-	  			<a><img src="img/doggy2.jpg" width="300"></a>
-	  		</button>
-  		</div>
-  		<div style="padding-left: 27.5%;padding-top: 5%">
-  			<button onclick="window.location.href = 'http://203.204.231.25:3000/users/roomList'">
-  				<a><img src="img/chatRoomListPic.jpg" width="300"></a>
-  			</button>
-				
-  			<button onclick="linkPersonalSetURL()" style="margin-left: 15%">
-  				<a><img src="img/personalSetPic.jpg" width="300"></a>
-  			</button>
-  		</div>
-
+		<div style="padding-left: 15%">
+			<div style="padding-top:150px ">
+				<h2><span  class="badge col-md-2 offset-md-4 ">CREATE A CHAT ROOM</span></h2>
+			</div>
+		</div>
+		<div style="padding-left: 8% ">	
+			<div style="padding-top: 30px" class=""></div>
+				<form action="" class="" name="loginForm" onsubmit="">
+			  		<div class="form-group">
+		    			<input type="text" class="col-lg-3 form-control offset-md-4 bg-light" id="chatRoomName" aria-describedby="emailHelp" placeholder="Enter ChatRoom Name">
+		  			</div>
+		  			<div class="form-group">
+		    			<input class="offset-md-4" type="checkbox" class="form-check-input" id="passWordNeeded" onclick="passWordNeed()">
+		    			<label class="form-check-label" for="exampleCheck1">private</label>
+					  </div>	  
+					  <input style="display:none" type="text" class="col-lg-3 form-control offset-md-4 bg-light" id="roomPassword" placeholder="Enter ChatRoom password">
+		  			<button style="margin-top: 2%" type="submit" class="col-lg-3 btn btn-primary offset-md-4" onclick="send_outCreateRoomForm()">Submit</button>
+				</form>
+				<div style="padding-top: 1%">
+					<a style="padding-left: 44.5%" href="roomList">go back</a>
+				</div>
+			</div>
+		</div>
 	</body>
 </html>
-
-
-

@@ -7,6 +7,43 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var app = express();
+
+
+
+
+
+
+//test
+var bodyParser = require('body-parser');
+require('dotenv').config();
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+server.listen(process.env.SOCKET_PORT);
+
+
+
+io.on('connection', (socket) => {
+  //socket.join("room1");
+  var url = socket.request.headers.referer;
+  var splited = url.split('/');
+  var roomID = splited[splited.length-1];
+
+  console.log(roomID);
+  socket.join(roomID);
+  console.log('a user connected');
+ 
+
+  socket.on("disconnect", () => {
+    console.log("a user go out");
+    socket.leave(roomID);
+  });
+
+  socket.on("message", (msg) => {
+    io.to(roomID).emit("message", msg);
+    console.log('message: ' + msg);
+  });
+});
 
 
 
@@ -18,11 +55,12 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var memberRouter = require("./routes/member");
 var verifyRouter = require("./routes/verification");
+var roomApi = require("./routes/RoomApi");
+var room = require("./routes/room");
+var generalCourse = require("./routes/generalCourse");
+var messageApi = require("./routes/messageApi");
 
-//new
-//var roomListRouter = require("./routes/roomList");
 
-var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -40,7 +78,15 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use("/member", memberRouter);
 app.use("/verify", verifyRouter);
-//app.use("/roomList",roomListRouter);
+app.use("/RoomApi",roomApi);
+app.use("/room",room);
+app.use("/messageApi",messageApi);
+app.use("/ger",generalCourse);
+
+
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -58,5 +104,11 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+
+
 module.exports = app;
+
+
+
+
 

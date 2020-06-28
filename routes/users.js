@@ -3,7 +3,7 @@ var router = express.Router();
 
 
 
-
+//const createRoomMethod = require("../controllers/createRoom_controller.js") 
 const UsersModifyMethod = require("../controllers/users_controller");
 const varify = require("../controllers/verification_controller.js");
 
@@ -17,6 +17,8 @@ router.get("/personalSet", usersMethod.getpersonalSetPage);
 
 router.get("/:name/profile", usersMethod.getProfile);
 
+
+
 router.get('/roomList', function(req, res, next) {
   res.render('chatRoomList', { 
   	title: 'ETestejs',
@@ -25,14 +27,15 @@ router.get('/roomList', function(req, res, next) {
   	});
 });
 
-//test roomID
-router.get('/test/:roomID', function(req, res, next) {
-  res.render('test', { 
-    title: req.params.roomID,
-    name: 'bevan222'
+router.get('/createRoom', function(req, res, next) {
+  res.render('createRoom', { 
+  	title: 'ETestejs',
+  	name: 'bevan222'
 
-    });
+  	});
 });
+
+//test roomID
 
 
 router.get('/chatRoom', function(req, res, next) {
